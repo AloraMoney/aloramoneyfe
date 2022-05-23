@@ -299,7 +299,7 @@ export default function Whitelist({
                       {userDeposit <= 0 ? (
                         <>
                           <div className="d-flex justify-content-center align-items-center btn-list py-lg-3">
-                            Select Tyer : &nbsp;
+                            Select Tier : &nbsp;
                             <select
                               id="tyer"
                               class="form-select"
