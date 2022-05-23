@@ -7,7 +7,7 @@ import Web3 from "web3";
 import { toast } from "react-toastify";
 import { addressList } from "../utils/addresses";
 import BusdContract from "../contracts/Busd.json";
-import AloraNodeContract from "../contracts/AloraNode.json";
+import WhiteListABI from "../contracts/WhiteList.json";
 import { getProvider } from "../utils/ProviderHelper";
 
 const id = process.env.REACT_APP_ENV === "live" ? 56 : 97;
@@ -22,17 +22,23 @@ export default function Whitelist({
   setWalletNetwork,
   setTask,
 }) {
+  const [tyerType, setTyerType] = useState("250");
   const [isWhitelist, setISWhitelist] = useState(false);
   const [isApproved, setIsApproved] = useState(false);
   const [wlProof, setWlProof] = useState(null);
   const [userDeposit, setUserDeposit] = useState(0);
   const [totalDeposit, setTotalDeposit] = useState(0);
   const [wallet, setWallet] = useState(false);
+  
+  
 
   useEffect(() => {
     const leaves = whitelisters.map((x) => SHA256(x));
     const tree = new MerkleTree(leaves, SHA256, { sortPairs: true });
-    const root = tree.getRoot().toString("hex");
+    console.log("tree", tree);
+    // const root = tree.getRoot().toString("hex");
+    const root = tree.getHexRoot();
+    console.log("root", root);
     const leaf = SHA256(userId);
     const proofForTx = tree.getHexProof(leaf);
     const staus = tree.verify(proofForTx, leaf, root);
@@ -53,9 +59,9 @@ export default function Whitelist({
             addressList.Busd[id]
           );
           const allownce = await BUSDContract.methods
-            .allowance(userId, addressList.AloraNode[id])
+            .allowance(userId, addressList.WhiteList[id])
             .call({ from: userId });
-          if (parseInt(allownce) >= 1000) {
+          if (parseInt(allownce) >= tyerType) {
             setIsApproved(true);
           }
         }
@@ -90,14 +96,14 @@ export default function Whitelist({
         const web3 = new Web3(
           curretProvider || process.env.REACT_APP_TESTNET_RPC_URL
         );
-        const AloraNode = new web3.eth.Contract(
-          AloraNodeContract.abi,
-          addressList.AloraNode[id]
+        const WhiteList = new web3.eth.Contract(
+          WhiteListABI.abi,
+          addressList.WhiteList[id]
         );
-        const totalAmount = await AloraNode.methods
+        const totalAmount = await WhiteList.methods
           ._totalDeposit()
           .call({ from: userId });
-        const userAmount = await AloraNode.methods
+        const userAmount = await WhiteList.methods
           .depositAmount(userId)
           .call({ from: userId });
         if (totalAmount && userAmount) {
@@ -135,15 +141,15 @@ export default function Whitelist({
           );
           const req = await BUSDContract.methods
             .approve(
-              addressList.AloraNode[id],
-              web3.utils.toWei("1000", "ether")
+              addressList.WhiteList[id],
+              web3.utils.toWei(tyerType, "ether")
             )
             .estimateGas({ from: userId });
           if (req) {
             const tx = await BUSDContract.methods
               .approve(
-                addressList.AloraNode[id],
-                web3.utils.toWei("1000", "ether")
+                addressList.WhiteList[id],
+                web3.utils.toWei(tyerType, "ether")
               )
               .send({ from: userId });
             if (tx) {
@@ -198,16 +204,17 @@ export default function Whitelist({
           const web3 = new Web3(
             curretProvider || process.env.REACT_APP_TESTNET_RPC_URL
           );
-          const AloraNode = new web3.eth.Contract(
-            AloraNodeContract.abi,
-            addressList.AloraNode[id]
+          const WhiteList = new web3.eth.Contract(
+            WhiteListABI.abi,
+            addressList.WhiteList[id]
           );
-          const req = await AloraNode.methods
-            .depositToken(wlProof)
+          let whitelistType = tyerType === "250" ? 0 : tyerType === "500" ? 1 : 2;
+          const req = await WhiteList.methods
+            .depositToken(wlProof, whitelistType)
             .estimateGas({ from: userId });
           if (req) {
-            const tx = await AloraNode.methods
-              .depositToken(wlProof)
+            const tx = await WhiteList.methods
+              .depositToken(wlProof, whitelistType)
               .send({ from: userId });
             if (tx) {
               fetchDeposits();
@@ -290,26 +297,43 @@ export default function Whitelist({
                         You Wallet is Whitelisted!
                       </p>
                       {userDeposit <= 0 ? (
-                        <div className="d-flex justify-content-center align-items-center btn-list py-lg-3">
-                          <button
-                            className={`btn btn-brown ${
-                              !isApproved && userId ? "active" : ""
-                            }`}
-                            onClick={() => approveBusd()}
-                            disabled={!isApproved && userId ? false : true}
-                          >
-                            Approve BUSD
-                          </button>
-                          <button
-                            className={`btn btn-brown ${
-                              userDeposit <= 0 && userId ? "active" : ""
-                            }`}
-                            onClick={() => depositBusd()}
-                            disabled={userDeposit <= 0 && userId ? false : true}
-                          >
-                            Deposit BUSD
-                          </button>
-                        </div>
+                        <>
+                          <div className="d-flex justify-content-center align-items-center btn-list py-lg-3">
+                            Select Tyer : &nbsp;
+                            <select
+                              id="tyer"
+                              class="form-select"
+                              style={{ width: "100px" }}
+                              onChange={e => setTyerType(e.target.value)}
+                            >
+                              <option value="250">250$</option>
+                              <option value="500">500$</option>
+                              <option value="1000">1000$</option>
+                            </select>
+                          </div>
+                          <div className="d-flex justify-content-center align-items-center btn-list py-lg-3">
+                            <button
+                              className={`btn btn-brown ${
+                                !isApproved && userId ? "active" : ""
+                              }`}
+                              onClick={() => approveBusd()}
+                              disabled={!isApproved && userId ? false : true}
+                            >
+                              Approve BUSD
+                            </button>
+                            <button
+                              className={`btn btn-brown ${
+                                userDeposit <= 0 && userId ? "active" : ""
+                              }`}
+                              onClick={() => depositBusd()}
+                              disabled={
+                                userDeposit <= 0 && userId ? false : true
+                              }
+                            >
+                              Deposit BUSD
+                            </button>
+                          </div>
+                        </>
                       ) : (
                         <p className="text-capitalize">Already Invested</p>
                       )}

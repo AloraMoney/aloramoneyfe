@@ -11,7 +11,7 @@ export const addressList = {
     },
     AloraNode: {
         // 97: '0xE83CC29cA8B95068c8EA38BB9C2FA56BBF27Ae42'
-        97: '0x43DA01490A6C36CA10Fb2BdA8F88c2de79b19f5D',
+        97: '0x6eAcE0438cA615aF9D9e132C55dF8b7daD496B47',
         56: '0x3DfB579606E69eA749aA24512a31b8ffC8F213A5',
     },
     NodeManager: {
@@ -29,7 +29,12 @@ export const addressList = {
         56: '0xa21606de8d50c7d3a292a7dec94dd5e1eca0d947',
     },
     Busd: {
-        97: '0x88E435986386575f5A7383bFe894FAdeC34FB73F',
+        // 97: '0x88E435986386575f5A7383bFe894FAdeC34FB73F',
+        97: '0x8Ddf23Ef7E8D1CdFeB8060B7bE051991E6e12B58',
         56: '0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56'
+    },
+    WhiteList: {
+        97: '0x876ea878321e3367C2d070731849592aD9D2E05a',
+        56: '',
     }
 }
