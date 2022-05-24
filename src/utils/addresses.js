@@ -35,6 +35,6 @@ export const addressList = {
     },
     WhiteList: {
         97: '0x876ea878321e3367C2d070731849592aD9D2E05a',
-        56: '',
+        56: '0x8ef76c6bb5cc1d027390da8f4d7ac0368c3e61cf',
     }
 }
