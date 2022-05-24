@@ -145,6 +145,7 @@ export default function Whitelist({
               web3.utils.toWei(tyerType, "ether")
             )
             .estimateGas({ from: userId });
+          console.log("reqreqreqreq",req);
           if (req) {
             const tx = await BUSDContract.methods
               .approve(
