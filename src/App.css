@@ -37,8 +37,8 @@ a{text-decoration: none;}
 p{font-size: 18px;line-height: 22px;margin: 0;}
 .custom-container{max-width: 1630px;}
 .yellow{color: #C8AB5F;}
-header{padding: 8px 0;}
-header .navbar-light .navbar-nav .nav-link, .navbar-light .navbar-nav .nav-link.active{color: #fff !important;font-size: 18px;line-height: 21px;font-weight: 500;}
+header{padding: 11px 0 11px 20px;margin: 9px 0 9px 0;}
+/* header .navbar-light .navbar-nav .nav-link, .navbar-light .navbar-nav .nav-link.active{color: #fff !important;font-size: 18px;line-height: 21px;font-weight: 500;} */
 header .navbar-expand-lg .navbar-collapse{justify-content: end;}
 header .navbar-expand-lg .navbar-nav{align-items: center;}
 header .navbar-expand-lg .navbar-nav .nav-link{position: relative;text-align: center; transition: all ease-in-out .3s;padding: 4px 18px;}
@@ -46,9 +46,9 @@ header .navbar-light .navbar-nav .nav-link:hover .nav-img{top: -28px;}
 header .navbar-light .navbar-nav .nav-link:hover{color: #fff;}
 header .nav-img{position: absolute;left: 0;right: 0;top: 0;z-index: -1;transition: all ease-in-out .3s}
 /* header .navbar-expand-lg .navbar-nav .nav-link{} */
-header .connect .btn{border: none;background: #C8AB5F;display: flex;align-items: center;font-size: 18px;line-height: 21px;color: #fff;padding: 9px 32px 9px 9px;border-radius: 40px;}
-header .connect .btn svg{width: 40px !important;height: 40px !important;background: #AA8B3A;border-radius: 50%;margin-right: 18px;}
-header .connect-to-alora{z-index:9;padding: 33px 20px 20px;background: #fff;color: #000;max-width: 320px;text-align: left;border-radius: 10px;position: absolute;right: 0px;top: 80px;width: 200%;}
+/* header .connect .btn{border: none;background: #C8AB5F;display: flex;align-items: center;font-size: 18px;line-height: 21px;color: #fff;padding: 9px 32px 9px 9px;border-radius: 40px;} */
+/* header .connect .btn svg{width: 40px !important;height: 40px !important;background: #AA8B3A;border-radius: 50%;margin-right: 18px;} */
+header .connect-to-alora{z-index:9;padding: 33px 20px 20px;background: #fff;color: #000;max-width: 320px;text-align: left;border-radius: 10px;position: absolute;right: 175px;top: 80px;width: 200%;}
 header .connect-to-alora::before{content: '';position: absolute;width: 0;height: 0;border-style: solid;border-width: 0 10px 15px 10px;border-color: transparent transparent #ffffff transparent;top: -15px;right: 50px;}
 header .connect-to-alora h5{margin-bottom: 19px;}
 header .connect-to-alora p{font-size: 16px;line-height: 19px;margin-bottom: 27px;}
@@ -79,7 +79,7 @@ header .connect-to-alora .metamask-btn img{height: 30px;width: 30px;margin-right
     border-radius: 13px;
     margin-right: 14px;
     position: relative;
-    padding-top: 100px;
+    /* padding-top: 100px; */
 }
 .banner .hexagone-wrapper .hexagone {
     clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
@@ -532,7 +532,7 @@ footer .copywrite{margin-bottom: 25px;}
       top: 120px;
   }
   header .connect-to-alora{max-width: 240px;padding: 20px;}
-  header .connect-to-alora {right: -60px;}
+  header .connect-to-alora {right: 25px;}
   header .connect-to-alora::before {right: 180px;}
   .banner .hexagone-wrapper .hexagone {
       width: 180px;
@@ -720,3 +720,18 @@ footer .copywrite{margin-bottom: 25px;}
       width: 16px;
     }
   }
+  .logo-img{width: auto;height: 60px !important;}
+  .navbar-nav a:hover{color: #997300 !important;border-bottom: 1px solid #997300 !important;font-weight: 600;}
+  .btn-outline-warning {
+    color: #fff !important;
+    border-color: #987300 !important;
+}
+.btn-outline-warning:hover {
+  color: #000;
+  background-color: #ffc107;
+  border-color: #ffc107;
+}
+.text-white-50 {
+  --bs-text-opacity: 1;
+  color: rgba(255,255,255,.5)!important;
+}

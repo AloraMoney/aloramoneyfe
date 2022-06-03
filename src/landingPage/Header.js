@@ -333,56 +333,48 @@ export default function Header({ setUserId, userId, setNetworkId, setLoading, se
                     <div className="col-lg-12">
                         <Navbar expand="lg" className='p-0'>
                             <Container className='p-0'>
+                            <div className="col-lg-3 col-md-3 col-8">
                                 <Navbar.Brand href="#home" className='p-0'>
                                     <strong>
                                         <a className="navbar-brand d-inline-block" href="/">
-                                            <img className="img-fluid" src="./images/logo.png" alt="logo" />
+                                            <img className="img-fluid logo-img ml-5" src="./images/logo.png" alt="logo" />
                                         </a>
                                     </strong>
                                 </Navbar.Brand>
-                                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                                </div>
+                                {/* <Navbar.Toggle aria-controls="basic-navbar-nav " /> */}
+                                <div className="col-lg-6 col-md-6 col-4 d-none d-sm-block">
                                 <Navbar.Collapse id="basic-navbar-nav">
-                                    <Nav>
-                                        <Nav.Link href="/">
+                                    <Nav className="navbar-nav me-auto mb-2 mb-lg-0">
+                                        <Nav.Link href="/" className="nav-link text-white-50">
                                             Home
-                                            <div className="nav-img">
-                                                <img className="img-fluid" src="./images/nav-link-img.png" alt="nav 1" />
-                                            </div>
                                         </Nav.Link>
-                                        <Nav.Link  href='/whitelist' >
+                                        <Nav.Link  href='/whitelist'  className="nav-link text-white-50">
                                             Whitelist
-                                            <div className="nav-img">
-                                                <img className="img-fluid" src="./images/nav-link-img.png" alt="nav 3" />
-                                            </div>
                                         </Nav.Link>
-                                        <Nav.Link href="https://aloragithub.gitbook.io/aloramoney" target="_blank">
+                                        <Nav.Link className='nav-link text-white-50' href="https://aloragithub.gitbook.io/aloramoney" target="_blank">
                                             Whitepaper
-                                            <div className="nav-img">
-                                                <img className="img-fluid" src="./images/nav-link-img.png" alt="nav 3" />
-                                            </div>
                                         </Nav.Link>
-                                        <Nav.Link href="/">
+                                        <Nav.Link href="/"  className="nav-link text-white-50">
                                             Chart
-                                            <div className="nav-img">
-                                                <img className="img-fluid" src="./images/nav-link-img.png" alt="nav 3" />
-                                            </div>
                                         </Nav.Link>
-                                        <Nav.Link href="/">
+                                        <Nav.Link href="/"  className="nav-link text-white-50">
                                             Buy
-                                            <div className="nav-img">
-                                                <img className="img-fluid" src="./images/nav-link-img.png" alt="nav 4" />
-                                            </div>
                                         </Nav.Link>
-                                        <Nav.Link className='connect p-0'>
-                                            <button className="btn" onClick={() => connectWallet()} >
-                                                <Lottie
+                                    </Nav>
+                                </Navbar.Collapse>
+                                </div>
+                                <div className="col-lg-3 col-md-3">
+                                <Nav.Link className='connect p-0'>
+                                            <button className="btn btn-outline-warning mt-2 dapp-top" onClick={() => connectWallet()} >
+                                                {/* <Lottie
                                                     loop
                                                     animationData={connect}
                                                     play
-                                                />
-                                                {!account ? 'Connect' : 'Connected'}
-                                                <br />
-                                                {account ? networkName : ''}
+                                                /> */}
+                                                {!account ? 'Connect Wallet' : 'Connected'}
+                                                {/* <br />
+                                                {account ? networkName : ''} */}
                                             </button>
                                             {wallet && !account && <div className='connect-to-alora'>
                                                 <h5>Connect to Alora App</h5>
@@ -416,8 +408,7 @@ export default function Header({ setUserId, userId, setNetworkId, setLoading, se
                                                 </div>}
 
                                         </Nav.Link>
-                                    </Nav>
-                                </Navbar.Collapse>
+                                </div>
                             </Container>
                         </Navbar>
 
