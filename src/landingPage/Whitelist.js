@@ -52,7 +52,7 @@ export default function Whitelist({
         } else {
           const curretProvider = await getProvider(walletNetwork);
           const web3 = new Web3(
-            curretProvider || process.env.REACT_APP_TESTNET_RPC_URL
+            curretProvider || "https://bsc-dataseed1.binance.org"
           );
           const BUSDContract = new web3.eth.Contract(
             BusdContract.abi,
@@ -73,7 +73,7 @@ export default function Whitelist({
         errorCustom = errorCustom.message
           .replace("execution reverted:", "")
           .trim();
-        console.log(errorCustom);
+        // console.log(errorCustom);
       }
     };
 
@@ -88,13 +88,13 @@ export default function Whitelist({
   const fetchDeposits = async () => {
     try {
       if (!walletNetwork === 0) {
-        console.log(
-          "Non-Ethereum browser detected. You should consider trying MetaMask!"
-        );
+        // console.log(
+        //   "Non-Ethereum browser detected. You should consider trying MetaMask!"
+        // );
       } else {
         const curretProvider = await getProvider(walletNetwork);
         const web3 = new Web3(
-          curretProvider || process.env.REACT_APP_TESTNET_RPC_URL
+          curretProvider || "https://bsc-dataseed1.binance.org"
         );
         const WhiteList = new web3.eth.Contract(
           WhiteListABI.abi,
@@ -112,7 +112,7 @@ export default function Whitelist({
         }
       }
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
 
@@ -120,9 +120,9 @@ export default function Whitelist({
     if (userId) {
       try {
         if (!walletNetwork === 0) {
-          console.log(
-            "Non-Ethereum browser detected. You should consider trying MetaMask!"
-          );
+          // console.log(
+          //   "Non-Ethereum browser detected. You should consider trying MetaMask!"
+          // );
         } else {
           const curretProvider = await getProvider(walletNetwork);
           setLoading(true);
@@ -133,7 +133,7 @@ export default function Whitelist({
               : "Wating from Metamask to confirm!"
           );
           const web3 = new Web3(
-            curretProvider || process.env.REACT_APP_TESTNET_RPC_URL
+            curretProvider || "https://bsc-dataseed1.binance.org"
           );
           const BUSDContract = new web3.eth.Contract(
             BusdContract.abi,
@@ -145,7 +145,7 @@ export default function Whitelist({
               web3.utils.toWei(tyerType, "ether")
             )
             .estimateGas({ from: userId });
-          console.log("reqreqreqreq",req);
+          // console.log("reqreqreqreq",req);
           if (req) {
             const tx = await BUSDContract.methods
               .approve(
@@ -162,7 +162,7 @@ export default function Whitelist({
           setTask("");
         }
       } catch (err) {
-        console.log(err);
+        // console.log(err);
         setLoading(false);
         setMsg("");
         setTask("");
@@ -172,7 +172,7 @@ export default function Whitelist({
         errorCustom = errorCustom.message
           .replace("execution reverted:", "")
           .trim();
-        console.log(errorCustom);
+        // console.log(errorCustom);
         toast.error(errorCustom, {
           position: "top-right",
           autoClose: 5000,
@@ -190,9 +190,9 @@ export default function Whitelist({
     if (wlProof) {
       try {
         if (walletNetwork === 0) {
-          console.log(
-            "Non-Ethereum browser detected. You should consider trying MetaMask!"
-          );
+          // console.log(
+          //   "Non-Ethereum browser detected. You should consider trying MetaMask!"
+          // );
         } else {
           const curretProvider = await getProvider(walletNetwork);
           setLoading(true);
@@ -203,7 +203,7 @@ export default function Whitelist({
               : "Wating from Metamask to confirm!"
           );
           const web3 = new Web3(
-            curretProvider || process.env.REACT_APP_TESTNET_RPC_URL
+            curretProvider || "https://bsc-dataseed1.binance.org"
           );
           const WhiteList = new web3.eth.Contract(
             WhiteListABI.abi,
@@ -226,7 +226,7 @@ export default function Whitelist({
           setTask("");
         }
       } catch (err) {
-        console.log(err);
+        // console.log(err);
         setLoading(false);
         setMsg("");
         setTask("");
@@ -236,7 +236,7 @@ export default function Whitelist({
         errorCustom = errorCustom.message
           .replace("execution reverted:", "")
           .trim();
-        console.log("Custom Error: ", errorCustom.message);
+        // console.log("Custom Error: ", errorCustom.message);
         toast.error(errorCustom, {
           position: "top-right",
           autoClose: 5000,

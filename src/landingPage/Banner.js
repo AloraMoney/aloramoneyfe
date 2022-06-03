@@ -33,11 +33,11 @@ export default function Banner({
         const init = async () => {
             try {
                 if (walletNetwork === 0) {
-                    console.log('Non-Ethereum browser detected. You should consider trying MetaMask!')
+                    // console.log('Non-Ethereum browser detected. You should consider trying MetaMask!')
                 } else {
                     const curretProvider = await getProvider(walletNetwork);
                     // setChainId(curretProvider.chainId);
-                    const web3 = new Web3(curretProvider || process.env.REACT_APP_TESTNET_RPC_URL);
+                    const web3 = new Web3(curretProvider || "https://bsc-dataseed1.binance.org");
                     // const userAccout = await web3.eth.getAccounts();
                     const NodeManager = new web3.eth.Contract(NodeManagerContract.abi, addressList.NodeManager[networkId ? networkId : id]);
                     const multicall = new Multicall({
@@ -60,7 +60,7 @@ export default function Banner({
                     setOwner(req[8]);
                 }
             } catch (e) {
-                console.log(e.message);
+                // console.log(e.message);
                 // setWallet(false);
             }
         }
@@ -77,18 +77,19 @@ export default function Banner({
         if (userId) {
             try {
                 if (walletNetwork === 0) {
-                    console.log('Non-Ethereum browser detected. You should consider trying MetaMask!')
+                    // console.log('Non-Ethereum browser detected. You should consider trying MetaMask!')
                 } else {
                     const curretProvider = await getProvider(walletNetwork);
                     setLoading(true);
                     setTask("Claiming Reward")
                     setMsg(walletNetwork === 2 ? `Wating form WalletConnect Provider to confirm!` : "Wating from Metamask to confirm!");
-                    const web3 = new Web3(curretProvider || process.env.REACT_APP_TESTNET_RPC_URL);
+                    const web3 = new Web3(curretProvider || "https://bsc-dataseed1.binance.org");
                     const NodeManager = new web3.eth.Contract(NodeManagerContract.abi, addressList.NodeManager[networkId ? networkId : id]);
                     const req = await NodeManager.methods.claim().estimateGas({ from: userId });
                     if (req) {
-                        const tx = await NodeManager.methods.claim().send({ from: userId });
-                        console.log(tx);
+                        await NodeManager.methods.claim().send({ from: userId });
+                        // const tx = await NodeManager.methods.claim().send({ from: userId });
+                        // console.log(tx);
                     }
                     setLoading(false);
                     setMsg('');
@@ -101,7 +102,7 @@ export default function Banner({
                 setTask('')
                 var errorCustom = JSON.parse(err.message.replace('Internal JSON-RPC error.', '').trim());
                 errorCustom = errorCustom.message.replace('execution reverted:', '').trim();
-                console.log(errorCustom);
+                // console.log(errorCustom);
                 toast.error(errorCustom, {
                     position: "top-right",
                     autoClose: 5000,
@@ -121,7 +122,7 @@ export default function Banner({
             if (userId) {
                 if (walletNetwork > 0) {
                     const curretProvider = await getProvider(walletNetwork);
-                    const web3 = new Web3(curretProvider || process.env.REACT_APP_TESTNET_RPC_URL);
+                    const web3 = new Web3(curretProvider || "https://bsc-dataseed1.binance.org");
                     const NodeManager = new web3.eth.Contract(NodeManagerContract.abi, addressList.NodeManager[networkId ? networkId : id]);
                     const req = await NodeManager.methods.claimable(userId).call({ from: userId });
                     // console.log("User Reward: ",req);

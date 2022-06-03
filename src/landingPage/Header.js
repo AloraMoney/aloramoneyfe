@@ -118,10 +118,10 @@ export default function Header({ setUserId, userId, setNetworkId, setLoading, se
                 setLoading(true);
                 setMsg("Connecting with Metamask")
                 const currentProvider = await getProvider(1)
-                const web3 = new Web3(currentProvider || process.env.REACT_APP_TESTNET_RPC_URL);
+                const web3 = new Web3(currentProvider || "https://bsc-dataseed1.binance.org");
                 // let tempId = parseInt(currentProvider.chainId, 16);
                 let tempId = await web3.eth.getChainId();
-                console.log("Metamask Chain ID on load: ", tempId);
+                // console.log("Metamask Chain ID on load: ", tempId);
                 const userAccout = await web3.eth.getAccounts();
                 if (mm !== userAccout[0]) {
                     localStorage.setItem('userAddress', userAccout[0]);
@@ -141,10 +141,10 @@ export default function Header({ setUserId, userId, setNetworkId, setLoading, se
                 setLoading(true);
                 setMsg("Connecting with Wallet Connect Provider")
                 const currentProvider = await getProvider(2)
-                const web3 = new Web3(currentProvider || process.env.REACT_APP_TESTNET_RPC_URL);
+                const web3 = new Web3(currentProvider || "https://bsc-dataseed1.binance.org");
                 let tempId = await web3.eth.getChainId()
                 setChainId(tempId);
-                console.log("WalletConnect Chain ID: ", tempId);
+                // console.log("WalletConnect Chain ID: ", tempId);
                 const userAccout = await web3.eth.getAccounts();
                 if (wc.accounts[0] !== userAccout[0]) {
                     localStorage.setItem('userAddress', userAccout[0]);
@@ -198,7 +198,7 @@ export default function Header({ setUserId, userId, setNetworkId, setLoading, se
                     const currentProvider = window.ethereum;
                     setChainId(parseInt(currentProvider.chainId,16));
                     await currentProvider.request({ method: 'eth_requestAccounts' })
-                    const web3 = new Web3(currentProvider || process.env.REACT_APP_TESTNET_RPC_URL);
+                    const web3 = new Web3(currentProvider || "https://bsc-dataseed1.binance.org");
                     const userAccout = await web3.eth.getAccounts();
                     setAccount(userAccout[0]);
                     setUserId(userAccout[0]);
@@ -220,7 +220,7 @@ export default function Header({ setUserId, userId, setNetworkId, setLoading, se
             } catch (e) {
                 setLoading(false);
                 setMsg('');
-                console.log(e.message);
+                // console.log(e.message);
                 setWallet(false);
             }
         } else if (type === "wc") {
@@ -257,7 +257,7 @@ export default function Header({ setUserId, userId, setNetworkId, setLoading, se
             } catch (e) {
                 setLoading(false);
                 setMsg('');
-                console.log(e.message);
+                // console.log(e.message);
                 setWallet(false);
             }
 

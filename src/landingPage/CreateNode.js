@@ -6,6 +6,7 @@ import AloraNodeContract from '../contracts/AloraNode.json';
 import { addressList } from '../utils/addresses';
 import { toast } from 'react-toastify';
 import config from '../utils/tiers.json';
+import { RPC_URL } from '../utils/rpc';
 import { getProvider } from '../utils/ProviderHelper'
 import Multicall from '@dopex-io/web3-multicall';
 import NodeManagerContract from '../contracts/NodeManager.json';
@@ -42,12 +43,13 @@ export default function CreateNode({ userId, setReload, networkId, nodesData, lo
 
     useEffect(() => {
         const initTiers = async () => {
+            //"https://bsc-dataseed1.binance.org"
             try {
                 if (walletNetwork === 0) {
-                    console.log('Non-Ethereum browser detected. You should consider trying MetaMask!')
+                    // console.log('Non-Ethereum browser detected. You should consider trying MetaMask!')
                 } else {
                     const curretProvider = await getProvider(walletNetwork);
-                    const web3 = new Web3(process.env.REACT_APP_TESTNET_RPC_URL);
+                    const web3 = new Web3("https://bsc-dataseed1.binance.org");
                     const NodeManager = new web3.eth.Contract(NodeManagerContract.abi, addressList.NodeManager[networkId ? networkId : id]);
                     const multicall = new Multicall({
                         multicallAddress: addressList.Multicall[networkId ? networkId : id],
@@ -61,17 +63,17 @@ export default function CreateNode({ userId, setReload, networkId, nodesData, lo
                     setTiersData(req);
                 }
             } catch (e) {
-                console.log(e.message);
+                // console.log(e.message);
             }
         }
 
         const init = async () => {
             try {
                 if (walletNetwork === 0) {
-                    console.log('Non-Ethereum browser detected. You should consider trying MetaMask!')
+                    // console.log('Non-Ethereum browser detected. You should consider trying MetaMask!')
                 } else {
                     const curretProvider = await getProvider(walletNetwork);
-                    const web3 = new Web3(curretProvider || process.env.REACT_APP_TESTNET_RPC_URL);
+                    const web3 = new Web3(curretProvider || "https://bsc-dataseed1.binance.org");
                     const userAccout = await web3.eth.getAccounts();
                     const AloraContract = new web3.eth.Contract(AloraNodeContract.abi, addressList.AloraNode[networkId ? networkId : id]);
                     const allownce = await AloraContract.methods.allowance(userAccout[0], addressList.feeManager[networkId ? networkId : id]).call();
@@ -80,7 +82,7 @@ export default function CreateNode({ userId, setReload, networkId, nodesData, lo
                     setUserBalance(Web3.utils.fromWei(balance, 'ether'));
                 }
             } catch (e) {
-                console.log(e.message);
+                // console.log(e.message);
             }
         }
 
@@ -97,8 +99,8 @@ export default function CreateNode({ userId, setReload, networkId, nodesData, lo
                 if (walletNetwork === 0) {
                     setLoading(true);
                     setMsg("Loading tiers ...");
-                    console.log('Non-Ethereum browser detected. You should consider trying MetaMask!');
-                    const curretProvider = process.env.REACT_APP_TESTNET_RPC_URL;
+                    // console.log('Non-Ethereum browser detected. You should consider trying MetaMask!');
+                    const curretProvider = "https://bsc-dataseed1.binance.org";
                     const web3 = new Web3(curretProvider);
                     const NodeManager = new web3.eth.Contract(NodeManagerContract.abi, addressList.NodeManager[networkId ? networkId : id]);
                     const multicall = new Multicall({
@@ -117,7 +119,7 @@ export default function CreateNode({ userId, setReload, networkId, nodesData, lo
                     setLoading(true);
                     setMsg("Loading tiers ...");
                     const curretProvider = await getProvider(walletNetwork);
-                    const web3 = new Web3(curretProvider || process.env.REACT_APP_TESTNET_RPC_URL);
+                    const web3 = new Web3(curretProvider || "https://bsc-dataseed1.binance.org");
                     const NodeManager = new web3.eth.Contract(NodeManagerContract.abi, addressList.NodeManager[networkId ? networkId : id]);
                     const multicall = new Multicall({
                         multicallAddress: addressList.Multicall[networkId ? networkId : id],
@@ -134,7 +136,7 @@ export default function CreateNode({ userId, setReload, networkId, nodesData, lo
 
                 }
             } catch (e) {
-                console.log(e.message);
+                // console.log(e.message);
                 setLoading(false);
                 setMsg('');
             }
@@ -147,19 +149,19 @@ export default function CreateNode({ userId, setReload, networkId, nodesData, lo
         if (userId) {
             try {
                 if (walletNetwork === 0) {
-                    console.log('Non-Ethereum browser detected. You should consider trying MetaMask!')
+                    // console.log('Non-Ethereum browser detected. You should consider trying MetaMask!')
                 } else {
                     const curretProvider = await getProvider(walletNetwork);
                     setLoading(true);
                     setTask("Approving Alora")
                     setMsg(walletNetwork === 2 ? `Wating form WalletConnect Provider to confirm!` : "Wating from Metamask to confirm!");
-                    const web3 = new Web3(curretProvider || process.env.REACT_APP_TESTNET_RPC_URL);
+                    const web3 = new Web3(curretProvider || "https://bsc-dataseed1.binance.org");
                     const AloraContract = new web3.eth.Contract(AloraNodeContract.abi, addressList.AloraNode[networkId ? networkId : id]);
                     const req = await AloraContract.methods.approve(addressList.feeManager[networkId ? networkId : id], web3.utils.toWei(amount, 'ether')).estimateGas({ from: userId });
                     if (req) {
                         const tx = await AloraContract.methods.approve(addressList.feeManager[networkId ? networkId : id], web3.utils.toWei(amount, 'ether')).send({ from: userId });
                         if (tx) {
-                            console.log(tx);
+                            // console.log(tx);
                             fetchUserBalance(AloraContract);
                             setUserAllownce(web3.utils.toWei(amount, 'ether'));
                             setLoading(false);
@@ -171,13 +173,13 @@ export default function CreateNode({ userId, setReload, networkId, nodesData, lo
 
                 }
             } catch (err) {
-                console.log(err);
+                // console.log(err);
                 setLoading(false);
                 setMsg("");
                 setTask("")
                 var errorCustom = JSON.parse(err.message.replace('Internal JSON-RPC error.', '').trim());
                 errorCustom = errorCustom.message.replace('execution reverted:', '').trim();
-                console.log(errorCustom);
+                // console.log(errorCustom);
                 toast.error(errorCustom, {
                     position: "top-right",
                     autoClose: 5000,
@@ -267,19 +269,19 @@ export default function CreateNode({ userId, setReload, networkId, nodesData, lo
             } else {
                 try {
                     if (walletNetwork === 0) {
-                        console.log('Non-Ethereum browser detected. You should consider trying MetaMask!')
+                        // console.log('Non-Ethereum browser detected. You should consider trying MetaMask!')
                     } else {
                         const curretProvider = await getProvider(walletNetwork);
                         setLoading(true);
                         setTask("Creating Tier")
                         setMsg(walletNetwork === 2 ? `Wating form WalletConnect Provider to confirm!` : "Wating from Metamask to confirm!");
-                        const web3 = new Web3(curretProvider || process.env.REACT_APP_TESTNET_RPC_URL);
+                        const web3 = new Web3(curretProvider || "https://bsc-dataseed1.binance.org");
                         const NodeManager = new web3.eth.Contract(NodeManagerContract.abi, addressList.NodeManager[networkId ? networkId : id]);
                         const s_tier = tiersData[tire];
                         const req = await NodeManager.methods.create(s_tier[0], '', noOfNodes).estimateGas({ from: userId });
                         if (req) {
                             const tx = await NodeManager.methods.create(s_tier[0], '', noOfNodes).send({ from: userId });
-                            console.log(tx);
+                            // console.log(tx);
                             setReload(true);
                         }
                         setLoading(false);
@@ -292,7 +294,7 @@ export default function CreateNode({ userId, setReload, networkId, nodesData, lo
                     setTask('')
                     var errorCustom = JSON.parse(err.message.replace('Internal JSON-RPC error.', '').trim());
                     errorCustom = errorCustom.message.replace('execution reverted:', '').trim();
-                    console.log(errorCustom);
+                    // console.log(errorCustom);
                     toast.error(errorCustom, {
                         position: "top-right",
                         autoClose: 5000,
@@ -342,19 +344,19 @@ export default function CreateNode({ userId, setReload, networkId, nodesData, lo
         } else {
             try {
                 if (walletNetwork === 0) {
-                    console.log('Non-Ethereum browser detected. You should consider trying MetaMask!')
+                    // console.log('Non-Ethereum browser detected. You should consider trying MetaMask!')
                 } else {
                     const curretProvider = await getProvider(walletNetwork);
                     setLoading(true);
                     setTask("Compounding Tiers")
                     setMsg(walletNetwork === 2 ? `Wating form WalletConnect Provider to confirm!` : "Wating from Metamask to confirm!");
-                    const web3 = new Web3(curretProvider || process.env.REACT_APP_TESTNET_RPC_URL);
+                    const web3 = new Web3(curretProvider || "https://bsc-dataseed1.binance.org");
                     const NodeManager = new web3.eth.Contract(NodeManagerContract.abi, addressList.NodeManager[networkId ? networkId : id]);
                     const s_tier = tiersData[tire];
                     const req = await NodeManager.methods.compound(s_tier[0], '', noOfNodes).estimateGas({ from: userId });
                     if (req) {
                         const tx = await NodeManager.methods.compound(s_tier[0], '', noOfNodes).send({ from: userId });
-                        console.log(tx);
+                        // console.log(tx);
                         setReload(true);
                     }
                     setLoading(false);
@@ -368,7 +370,7 @@ export default function CreateNode({ userId, setReload, networkId, nodesData, lo
                 setTask('')
                 var errorCustom = JSON.parse(err.message.replace('Internal JSON-RPC error.', '').trim());
                 errorCustom = errorCustom.message.replace('execution reverted:', '').trim();
-                console.log(errorCustom);
+                // console.log(errorCustom);
                 toast.error(errorCustom, {
                     position: "top-right",
                     autoClose: 5000,
@@ -417,19 +419,19 @@ export default function CreateNode({ userId, setReload, networkId, nodesData, lo
         else {
             try {
                 if (walletNetwork === 0) {
-                    console.log('Non-Ethereum browser detected. You should consider trying MetaMask!')
+                    // console.log('Non-Ethereum browser detected. You should consider trying MetaMask!')
                 } else {
                     const curretProvider = await getProvider(walletNetwork);
                     setLoading(true);
                     setTask("Transfering Nodes")
                     setMsg(walletNetwork === 2 ? `Wating form WalletConnect Provider to confirm!` : "Wating from Metamask to confirm!");
-                    const web3 = new Web3(curretProvider || process.env.REACT_APP_TESTNET_RPC_URL);
+                    const web3 = new Web3(curretProvider || "https://bsc-dataseed1.binance.org");
                     const NodeManager = new web3.eth.Contract(NodeManagerContract.abi, addressList.NodeManager[networkId ? networkId : id]);
                     const s_tier = tiersData[tire];
                     const req = await NodeManager.methods.transfer(s_tier[0], noOfNodes, transferAddress).estimateGas({ from: userId });
                     if (req) {
                         const tx = await NodeManager.methods.transfer(s_tier[0], noOfNodes, transferAddress).send({ from: userId });
-                        console.log(tx);
+                        // console.log(tx);
                         setReload(true);
                     }
                     setLoading(false);
@@ -442,7 +444,7 @@ export default function CreateNode({ userId, setReload, networkId, nodesData, lo
                 setTask('')
                 var errorCustom = JSON.parse(err.message.replace('Internal JSON-RPC error.', '').trim());
                 errorCustom = errorCustom.message.replace('execution reverted:', '').trim();
-                console.log(errorCustom);
+                // console.log(errorCustom);
                 toast.error(errorCustom, {
                     position: "top-right",
                     autoClose: 5000,
@@ -488,18 +490,18 @@ export default function CreateNode({ userId, setReload, networkId, nodesData, lo
         } else {
             try {
                 if (walletNetwork === 0) {
-                    console.log('Non-Ethereum browser detected. You should consider trying MetaMask!')
+                    // console.log('Non-Ethereum browser detected. You should consider trying MetaMask!')
                 } else {
                     const curretProvider = await getProvider(walletNetwork);
                     setLoading(true);
                     setTask("Upgrading Bronze ⇒ Silver")
                     setMsg(walletNetwork === 2 ? `Wating form WalletConnect Provider to confirm!` : "Wating from Metamask to confirm!");
-                    const web3 = new Web3(curretProvider || process.env.REACT_APP_TESTNET_RPC_URL);
+                    const web3 = new Web3(curretProvider || "https://bsc-dataseed1.binance.org");
                     const NodeManager = new web3.eth.Contract(NodeManagerContract.abi, addressList.NodeManager[networkId ? networkId : id]);
                     const req = await NodeManager.methods.upgrade('bronze', 'silver', upgradeNoOfNodes).estimateGas({ from: userId });
                     if (req) {
                         const tx = await NodeManager.methods.upgrade('bronze', 'silver', upgradeNoOfNodes).send({ from: userId });
-                        console.log(tx);
+                        // console.log(tx);
                         setReload(true);
                     }
                     setLoading(false);
@@ -512,7 +514,7 @@ export default function CreateNode({ userId, setReload, networkId, nodesData, lo
                 setTask('')
                 var errorCustom = JSON.parse(err.message.replace('Internal JSON-RPC error.', '').trim());
                 errorCustom = errorCustom.message.replace('execution reverted:', '').trim();
-                console.log(errorCustom);
+                // console.log(errorCustom);
                 toast.error(errorCustom, {
                     position: "top-right",
                     autoClose: 5000,
@@ -541,18 +543,18 @@ export default function CreateNode({ userId, setReload, networkId, nodesData, lo
         } else {
             try {
                 if (walletNetwork === 0) {
-                    console.log('Non-Ethereum browser detected. You should consider trying MetaMask!')
+                    // console.log('Non-Ethereum browser detected. You should consider trying MetaMask!')
                 } else {
                     const curretProvider = await getProvider(walletNetwork);
                     setLoading(true);
                     setTask("Upgrading Bronze ⇒ Gold")
                     setMsg(walletNetwork === 2 ? `Wating form WalletConnect Provider to confirm!` : "Wating from Metamask to confirm!");
-                    const web3 = new Web3(curretProvider || process.env.REACT_APP_TESTNET_RPC_URL);
+                    const web3 = new Web3(curretProvider || "https://bsc-dataseed1.binance.org");
                     const NodeManager = new web3.eth.Contract(NodeManagerContract.abi, addressList.NodeManager[networkId ? networkId : id]);
                     const req = await NodeManager.methods.upgrade('bronze', 'gold', upgradeNoOfNodes).estimateGas({ from: userId });
                     if (req) {
                         const tx = await NodeManager.methods.upgrade('bronze', 'gold', upgradeNoOfNodes).send({ from: userId });
-                        console.log(tx);
+                        // console.log(tx);
                         setReload(true);
                     }
                     setLoading(false);
@@ -566,7 +568,7 @@ export default function CreateNode({ userId, setReload, networkId, nodesData, lo
                 setTask('');
                 var errorCustom = JSON.parse(err.message.replace('Internal JSON-RPC error.', '').trim());
                 errorCustom = errorCustom.message.replace('execution reverted:', '').trim();
-                console.log(errorCustom);
+                // console.log(errorCustom);
                 toast.error(errorCustom, {
                     position: "top-right",
                     autoClose: 5000,
@@ -594,18 +596,18 @@ export default function CreateNode({ userId, setReload, networkId, nodesData, lo
         } else {
             try {
                 if (walletNetwork === 0) {
-                    console.log('Non-Ethereum browser detected. You should consider trying MetaMask!')
+                    // console.log('Non-Ethereum browser detected. You should consider trying MetaMask!')
                 } else {
                     const curretProvider = await getProvider(walletNetwork);
                     setLoading(true);
                     setTask("Upgrading Silver ⇒ Gold");
                     setMsg(walletNetwork === 2 ? `Wating form WalletConnect Provider to confirm!` : "Wating from Metamask to confirm!");
-                    const web3 = new Web3(curretProvider || process.env.REACT_APP_TESTNET_RPC_URL);
+                    const web3 = new Web3(curretProvider || "https://bsc-dataseed1.binance.org");
                     const NodeManager = new web3.eth.Contract(NodeManagerContract.abi, addressList.NodeManager[networkId ? networkId : id]);
                     const req = await NodeManager.methods.upgrade('silver', 'gold', upgradeNoOfNodes).estimateGas({ from: userId });
                     if (req) {
                         const tx = await NodeManager.methods.upgrade('silver', 'gold', upgradeNoOfNodes).send({ from: userId });
-                        console.log(tx);
+                        // console.log(tx);
                         setReload(true);
                     }
                     setLoading(false);
@@ -619,7 +621,7 @@ export default function CreateNode({ userId, setReload, networkId, nodesData, lo
                 setTask('');
                 var errorCustom = JSON.parse(err.message.replace('Internal JSON-RPC error.', '').trim());
                 errorCustom = errorCustom.message.replace('execution reverted:', '').trim();
-                console.log(errorCustom);
+                // console.log(errorCustom);
                 toast.error(errorCustom, {
                     position: "top-right",
                     autoClose: 5000,
@@ -677,19 +679,19 @@ export default function CreateNode({ userId, setReload, networkId, nodesData, lo
         } else {
             try {
                 if (walletNetwork === 0) {
-                    console.log('Non-Ethereum browser detected. You should consider trying MetaMask!')
+                    // console.log('Non-Ethereum browser detected. You should consider trying MetaMask!')
                 } else {
                     const curretProvider = await getProvider(walletNetwork);
                     setLoading(true);
                     setTask(`Creating Nodes for ${transferAddressByOwner}`)
                     setMsg(walletNetwork === 2 ? `Wating form WalletConnect Provider to confirm!` : "Wating from Metamask to confirm!");
-                    const web3 = new Web3(curretProvider || process.env.REACT_APP_TESTNET_RPC_URL);
+                    const web3 = new Web3(curretProvider || "https://bsc-dataseed1.binance.org");
                     const NodeManager = new web3.eth.Contract(NodeManagerContract.abi, addressList.NodeManager[networkId ? networkId : id]);
                     const s_tier = tiersData[tire];
                     const req = await NodeManager.methods.createForUser(s_tier[0], noOfNodes, transferAddressByOwner).estimateGas({ from: userId });
                     if (req) {
                         const tx = await NodeManager.methods.createForUser(s_tier[0], noOfNodes, transferAddressByOwner).send({ from: userId });
-                        console.log(tx);
+                        // console.log(tx);
                         setReload(true);
                     }
                     setLoading(false);
@@ -702,7 +704,7 @@ export default function CreateNode({ userId, setReload, networkId, nodesData, lo
                 setTask('');
                 var errorCustom = JSON.parse(err.message.replace('Internal JSON-RPC error.', '').trim());
                 errorCustom = errorCustom.message.replace('execution reverted:', '').trim();
-                console.log(errorCustom);
+                // console.log(errorCustom);
                 toast.error(errorCustom, {
                     position: "top-right",
                     autoClose: 5000,
@@ -717,8 +719,8 @@ export default function CreateNode({ userId, setReload, networkId, nodesData, lo
     }
 
     const handelFetchUserInfo = async () => {
-        console.log("Returns the user info");
-        console.log("Address to view the user Info: ", userAddress);
+        // console.log("Returns the user info");
+        // console.log("Address to view the user Info: ", userAddress);
         if (!userId) {
             toast.error('Connect your wallet', {
                 position: "top-right",
@@ -743,7 +745,7 @@ export default function CreateNode({ userId, setReload, networkId, nodesData, lo
         else {
             try {
                 if (walletNetwork === 0) {
-                    console.log('Non-Ethereum browser detected. You should consider trying MetaMask!')
+                    // console.log('Non-Ethereum browser detected. You should consider trying MetaMask!')
                 } else {
                     setLoading(true);
                     setMsg("Fetching teirs ...");
@@ -767,7 +769,7 @@ export default function CreateNode({ userId, setReload, networkId, nodesData, lo
             } catch (e) {
                 setLoading(false);
                 setMsg('');
-                console.log(e.message);
+                // console.log(e.message);
             }
 
         }
