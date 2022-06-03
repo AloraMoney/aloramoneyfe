@@ -1,16 +1,13 @@
 import React, { useState, useEffect } from 'react'
-// import { Tab } from 'bootstrap'
 import { Col, Row, Container, Table } from 'react-bootstrap'
 import Web3 from 'web3';
 import AloraNodeContract from '../contracts/AloraNode.json';
 import { addressList } from '../utils/addresses';
 import { toast } from 'react-toastify';
 import config from '../utils/tiers.json';
-import { RPC_URL } from '../utils/rpc';
 import { getProvider } from '../utils/ProviderHelper'
 import Multicall from '@dopex-io/web3-multicall';
 import NodeManagerContract from '../contracts/NodeManager.json';
-// const appEnv = process.env.REACT_APP_ENV === 'live'? 'bsc' : 'bscTestnet';
 const id = process.env.REACT_APP_ENV === 'live' ? 56 : 97;
 
 export default function CreateNode({ userId, setReload, networkId, nodesData, loading, setLoading, owner, setMsg, setTask, walletNetwork }) {
@@ -33,9 +30,6 @@ export default function CreateNode({ userId, setReload, networkId, nodesData, lo
     const [userNodes, setUserNodes] = useState(null);
 
 
-
-
-
     const boxSelected = (e) => {
         setActive(true);
         setTire(e);
@@ -43,7 +37,7 @@ export default function CreateNode({ userId, setReload, networkId, nodesData, lo
 
     useEffect(() => {
         const initTiers = async () => {
-            //"https://bsc-dataseed1.binance.org"
+
             try {
                 if (walletNetwork === 0) {
                     // console.log('Non-Ethereum browser detected. You should consider trying MetaMask!')
@@ -90,7 +84,6 @@ export default function CreateNode({ userId, setReload, networkId, nodesData, lo
             init();
             initTiers();
         }
-        // eslint-disable-next-line   
     }, [userId]);
 
     useEffect(() => {
@@ -99,7 +92,6 @@ export default function CreateNode({ userId, setReload, networkId, nodesData, lo
                 if (walletNetwork === 0) {
                     setLoading(true);
                     setMsg("Loading tiers ...");
-                    // console.log('Non-Ethereum browser detected. You should consider trying MetaMask!');
                     const curretProvider = "https://bsc-dataseed1.binance.org";
                     const web3 = new Web3(curretProvider);
                     const NodeManager = new web3.eth.Contract(NodeManagerContract.abi, addressList.NodeManager[networkId ? networkId : id]);
@@ -568,7 +560,6 @@ export default function CreateNode({ userId, setReload, networkId, nodesData, lo
                 setTask('');
                 var errorCustom = JSON.parse(err.message.replace('Internal JSON-RPC error.', '').trim());
                 errorCustom = errorCustom.message.replace('execution reverted:', '').trim();
-                // console.log(errorCustom);
                 toast.error(errorCustom, {
                     position: "top-right",
                     autoClose: 5000,
@@ -704,7 +695,6 @@ export default function CreateNode({ userId, setReload, networkId, nodesData, lo
                 setTask('');
                 var errorCustom = JSON.parse(err.message.replace('Internal JSON-RPC error.', '').trim());
                 errorCustom = errorCustom.message.replace('execution reverted:', '').trim();
-                // console.log(errorCustom);
                 toast.error(errorCustom, {
                     position: "top-right",
                     autoClose: 5000,
