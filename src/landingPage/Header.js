@@ -342,8 +342,8 @@ export default function Header({ setUserId, userId, setNetworkId, setLoading, se
                                     </strong>
                                 </Navbar.Brand>
                                 </div>
-                                {/* <Navbar.Toggle aria-controls="basic-navbar-nav " /> */}
-                                <div className="col-lg-6 col-md-6 col-4 d-none d-sm-block">
+                                <Navbar.Toggle aria-controls="basic-navbar-nav " />
+                                <div className="col-lg-9 col-md-9 col-4 ">
                                 <Navbar.Collapse id="basic-navbar-nav">
                                     <Nav className="navbar-nav me-auto mb-2 mb-lg-0">
                                         <Nav.Link href="/" className="nav-link text-white-50">
@@ -361,11 +361,7 @@ export default function Header({ setUserId, userId, setNetworkId, setLoading, se
                                         <Nav.Link href="/"  className="nav-link text-white-50">
                                             Buy
                                         </Nav.Link>
-                                    </Nav>
-                                </Navbar.Collapse>
-                                </div>
-                                <div className="col-lg-3 col-md-3">
-                                <Nav.Link className='connect p-0'>
+                                        <Nav.Link className='connect p-0 connect-button col-12'>
                                             <button className="btn btn-outline-warning mt-2 dapp-top" onClick={() => connectWallet()} >
                                                 {/* <Lottie
                                                     loop
@@ -408,6 +404,8 @@ export default function Header({ setUserId, userId, setNetworkId, setLoading, se
                                                 </div>}
 
                                         </Nav.Link>
+                                    </Nav>
+                                </Navbar.Collapse>
                                 </div>
                             </Container>
                         </Navbar>
