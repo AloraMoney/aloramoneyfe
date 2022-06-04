@@ -162,11 +162,11 @@ export default function Banner({
                         </div>
                         <div className="hexagone-wrapper">
                             <div className="hexagone-parent text-center">
-                                {/* <div className="hexagone">
+                                <div className="hexagone">
                                     <div className="my-node ">
-                                        <img className="img-fluid" src="./images/my-nodes.png" alt="My nodes Img" />
+                                        <img className="img-fluid" src="./images/I.png" alt="My nodes Img" />
                                     </div>
-                                </div> */}
+                                </div>
                                 <div className="list">
                                     <ul>
                                         <li>
@@ -191,8 +191,8 @@ export default function Banner({
                                 </div>
                             </div>
                             <div className="hexagone-parent text-center">
-                                {/* <div className="hexagone">
-                                    <div className="total-nonde "> */}
+                                <div className="hexagone">
+                                <div className="my-node ">
                                         {/* <Lottie
                                             loop
                                             animationData={nodes}
@@ -201,8 +201,9 @@ export default function Banner({
                                         {/* <lottie-player
                                             src="https://assets4.lottiefiles.com/packages/lf20_slytwtf8.json"
                                             background="transparent" speed="0.5" loop autoplay></lottie-player> */}
-                                    {/* </div>
-                                </div> */}
+                                            <img src="./images/II.png" className='img-fluid'  />
+                                    </div>
+                                </div>
                                 <div className="list">
                                     <ul>
                                         <li>
@@ -225,8 +226,8 @@ export default function Banner({
                                 </div>
                             </div>
                             <div className="hexagone-parent text-center">
-                                {/* <div className="hexagone">
-                                    <div className="lottie-reward "> */}
+                                <div className="hexagone">
+                                <div className="my-node ">
                                         {/* <Lottie
                                             loop
                                             animationData={rewards}
@@ -235,8 +236,9 @@ export default function Banner({
                                         {/* <lottie-player
                                             src="https://assets9.lottiefiles.com/packages/lf20_iehc3ou4.json"
                                             background="transparent" speed="0.5" loop autoplay></lottie-player> */}
-                                    {/* </div>
-                                </div> */}
+                                            <img src="./images/III.png" className='img-fluid'  />
+                                    </div>
+                                </div>
                                 <div className="list">
                                     <ul>
                                         <li>

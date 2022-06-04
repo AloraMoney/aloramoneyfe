@@ -79,7 +79,7 @@ header .connect-to-alora .metamask-btn img{height: 30px;width: 30px;margin-right
     border-radius: 13px;
     margin-right: 14px;
     position: relative;
-    /* padding-top: 100px; */
+    padding-top: 80px;
 }
 .banner .hexagone-wrapper .hexagone {
     clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
