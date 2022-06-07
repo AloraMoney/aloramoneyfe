@@ -814,7 +814,7 @@ export default function CreateNode({ userId, setReload, networkId, nodesData, lo
                                                             <div className="content">
                                                                 <h4>{capitalize(item[0])}</h4>
                                                                 <p>{Web3.utils.fromWei(item[1], "ether")} Alora per Kingdom</p>
-                                                                <p>Earn {Web3.utils.fromWei(item[2], "ether")} Alora per Day</p>
+                                                                <p>Bronze kingdom earns {Web3.utils.fromWei(item[2], "ether")} Alora a day</p>
                                                             </div>
                                                             <span className="tick fa fa-check"></span>
                                                         </div>
