@@ -976,13 +976,15 @@ export default function CreateNode({ userId, setReload, networkId, nodesData, lo
                                     </Table>}
                                     <div className="upgrade-node">
                                         <h4>Upgrade Kingdoms</h4>
-                                        <p>In order to upgrade Kingdom tiers, you must possess a quantity of $ALORA
-                                            tokens that is equal to or greater than the difference in the tiers
-                                            price.</p>
+                                        <p>
+                                            <div>In order to upgrade Kingdom tiers, you must possess a quantity of $ALORA tokens that is equal to or greater than the difference in the higher tier you are upgrading to.</div>
+                                            <div>Example:</div>
+                                            10 bronze kingdoms (100 $Alora tokens) can be upgraded to 1 gold kingdom as it also requires 100 $Alora tokens.
+                                        </p>
                                         <ul className="">
-                                            <li>Bronze to Silver Kingdoms - Costs 5 Bronze Kingdoms</li>
-                                            <li>Bronze to Gold Kingdoms - Costs 10 Bronze Kingdoms</li>
-                                            <li className="me-0">Silver to Gold Kingdoms - Costs 2 Silver Kingdoms</li>
+                                            <li>Bronze kingdoms to a silver kingdom: 5 bronze kingdoms</li>
+                                            <li>Bronze kingdoms to a gold kingdom: 10 bronze kingdoms</li>
+                                            <li className="me-0">Silver kingdoms to a gold kingdom: 2 silver kingdoms</li>
                                         </ul>
                                         <Row>
                                             <Col lg="4">
