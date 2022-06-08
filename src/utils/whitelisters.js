@@ -500,4 +500,5 @@
     '0xCbc490fFae1c2Fcab3C185440383A0d0Cf68522b',
     '0xC02921600dba07c8C7C484a44A15e4D7b3918d62',
     'bnb1n78msy8qqr8zdut0mxuxq6j3xd6f3u34uh9cuy',
+    '0x8ac134f935C435F4DDfe9c2cCf281A3E203d80aa',
 ];
