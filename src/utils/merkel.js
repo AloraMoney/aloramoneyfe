@@ -514,6 +514,7 @@ const whitelisters = [
     '0x17c0c18c0151332f0C661DEdfC844D8b7ad15ef4',
     '0xf23393F2D0D8A68930A612cCCfA1e8c56166ca36',
     '0x93726C59573f4E21268E8Fb93c465FD2579D7f1a',
+    '0x936bcA03C22FDe86Fafb1eD8f00Df29405e0567d',
 ];
 
 const leaves = whitelisters.map(x => SHA256(x))
