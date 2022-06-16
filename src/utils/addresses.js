@@ -2,8 +2,8 @@
 export const addressList = {
     feeManager: {
         // 97: '0x1Ed0481C82Cd04a4bF6D23B50F015CaB09E09E48',
-        97: '0x55e49F336239Ba22bD7144A3dbAcB9882F465580',
-        56: '0x55e49F336239Ba22bD7144A3dbAcB9882F465580',
+        97: '0x9f1584ce4bb48a8af77100a2c8cb0cc1d9ee203f',
+        56: '0x9f1584ce4bb48a8af77100a2c8cb0cc1d9ee203f',
     },
     NFTSpecV1: {
         97: '',
@@ -11,13 +11,13 @@ export const addressList = {
     },
     AloraNode: {
         // 97: '0xE83CC29cA8B95068c8EA38BB9C2FA56BBF27Ae42'
-        97: '0x7252C261258d8AC61187336A65AD0e6d815A31dB',
-        56: '0x7252C261258d8AC61187336A65AD0e6d815A31dB',
+        97: '0x53315e88172a9ba5e2d2f7e2b67398c19e899882',
+        56: '0x53315e88172a9ba5e2d2f7e2b67398c19e899882',
     },
     NodeManager: {
         // 97: '0x6a41EaC479f6C6A7558F03b52719C60a7E0F51c8',
-        97: '0xB2c19CF635F82f1a5063d3C562cD38EdC77EB2d2',
-        56: '0xB2c19CF635F82f1a5063d3C562cD38EdC77EB2d2',
+        97: '0xb1d3c0bca9ec0835664b7a1010dde1cffc8829a8',
+        56: '0xb1d3c0bca9ec0835664b7a1010dde1cffc8829a8',
     },
     BoostNFT: {
         97: '',
