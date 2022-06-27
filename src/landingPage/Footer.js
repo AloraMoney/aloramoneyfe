@@ -23,13 +23,13 @@ export default function Footer() {
                                 <a href="https://discord.gg/aloramoney">Discord</a>
                             </li>
                             <li>
-                                <a href="/">Chart</a>
+                                <a href="https://dexscreener.com/bsc/0x58ffb8d97a22e94dd735ada09b9a2cf7624c97db">Chart</a>
                             </li>
                             <li>
-                                <a href="/">BuyNow</a>
+                                <a href="https://pancakeswap.finance/swap?outputCurrency=0x52840a1c56a40386dea15C33eE1D27599b1f8872">BuyNow</a>
                             </li>
                             <li className="me-0">
-                                <a href="/">BSCScan</a>
+                                <a href="https://bscscan.com/token/0x52840a1c56a40386dea15C33eE1D27599b1f8872">BSCScan</a>
                             </li>
                         </ul>
                         <p className="copywrite">© 2022 Alora. All Rights Reserved.</p>
