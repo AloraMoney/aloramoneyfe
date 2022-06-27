@@ -17,7 +17,7 @@ export default function Footer() {
                                 <a href="https://aloragithub.gitbook.io/aloramoney" target='_blank' rel="noreferrer">Whitepaper</a>
                             </li>
                             <li>
-                                <a href="https://twitter.com/aloramoney">Twitter</a>
+                                <a href="https://twitter.com/aloramarket">Twitter</a>
                             </li>
                             <li>
                                 <a href="https://discord.gg/aloramoney">Discord</a>
