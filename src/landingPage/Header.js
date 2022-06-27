@@ -355,10 +355,10 @@ export default function Header({ setUserId, userId, setNetworkId, setLoading, se
                                         <Nav.Link className='nav-link text-white-50' href="https://aloragithub.gitbook.io/aloramoney" target="_blank">
                                             Whitepaper
                                         </Nav.Link>
-                                        <Nav.Link href="/"  className="nav-link text-white-50">
+                                        <Nav.Link href="https://dexscreener.com/bsc/0x58ffb8d97a22e94dd735ada09b9a2cf7624c97db"  className="nav-link text-white-50">
                                             Chart
                                         </Nav.Link>
-                                        <Nav.Link href="/"  className="nav-link text-white-50">
+                                        <Nav.Link href="https://pancakeswap.finance/swap?outputCurrency=0x52840a1c56a40386dea15C33eE1D27599b1f8872"  className="nav-link text-white-50">
                                             Buy
                                         </Nav.Link>
                                         <Nav.Link className='connect p-0 connect-button col-12'>
