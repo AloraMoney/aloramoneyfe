@@ -826,7 +826,7 @@ export default function CreateNode({ userId, setReload, networkId, nodesData, lo
                                     </Row>
                                 </div>
                             </div>
-                            <h4 className="active-tier">Active Tier</h4>
+                            <h4 className="active-tier">Active Tier (CLAIM REWARDS BEFORE CREATING NEW KINGDOMS)</h4>
                             <form action="">
                                 <div className="nodes-input">
                                     <input
